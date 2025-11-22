@@ -14,7 +14,7 @@ const inputElement = document.querySelector(".to-do__input");
 function loadTasks() {
   const savedTasks = localStorage.getItem("tasks");
   if (savedTasks) {
-    return JSON.parse(savedTasks);
+    return JSON.parse(savedTasks); // Парсим массив задач из localStorage
   }
   return items;
 }
@@ -29,18 +29,17 @@ function createItem(item) {
   );
   const editButton = clone.querySelector(".to-do__item-button_type_edit");
 
-  // Устанавливаем текст задачи
-  textElement.textContent = item;
+  textElement.textContent = item; // Устанавливаем текст задачи
 
-  // Обработчик удаления
   deleteButton.addEventListener("click", () => {
+    // Обработчик удаления
     clone.remove();
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
   });
 
-  // Обработчик копирования
   duplicateButton.addEventListener("click", () => {
+    // Обработчик копирования
     const itemName = textElement.textContent;
     const newItem = createItem(itemName);
     listElement.prepend(newItem);
@@ -48,14 +47,14 @@ function createItem(item) {
     saveTasks(tasks);
   });
 
-  // Обработчик редактирования
   editButton.addEventListener("click", () => {
+    // Обработчик редактирования
     textElement.setAttribute("contenteditable", "true");
     textElement.focus();
   });
 
-  // Обработчик завершения редактирования
   textElement.addEventListener("blur", () => {
+    // Обработчик завершения редактирования
     textElement.removeAttribute("contenteditable");
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
@@ -77,30 +76,26 @@ function saveTasks(tasks) {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
-// Загрузка задач при старте
 items = loadTasks();
 items.forEach((item) => {
+  // Загрузка задач при старте
   const element = createItem(item);
   listElement.appendChild(element);
 });
 
-// Обработчик добавления задачи
 formElement.addEventListener("submit", (e) => {
+  // Обработчик добавления задачи
   e.preventDefault();
 
   const taskText = inputElement.value.trim();
   if (!taskText) return;
 
-  // Добавляем задачу в массив
-  items.push(taskText);
+  items.push(taskText); // Добавляем задачу в массив
 
-  // Создаём элемент и добавляем в начало DOM
-  const item = createItem(taskText);
+  const item = createItem(taskText); // Создаём элемент и добавляем в начало DOM
   listElement.prepend(item);
 
-  // Очищаем поле ввода
-  inputElement.value = "";
+  inputElement.value = ""; // Очищаем поле ввода
 
-  // Сохраняем в localStorage
-  saveTasks(items);
+  saveTasks(items); // Сохраняем в localStorage
 });
