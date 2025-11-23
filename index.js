@@ -51,6 +51,7 @@ function createItem(item) {
   });
 
   textElement.addEventListener("blur", () => {
+    // blur - когда элемент теряет фокус
     textElement.removeAttribute("contenteditable");
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
@@ -80,17 +81,17 @@ items.forEach((item) => {
 });
 
 formElement.addEventListener("submit", (e) => {
-  e.preventDefault();
+  e.preventDefault(); // Отменяет стандартное действие отправки формы
 
-  const taskText = inputElement.value.trim();
+  const taskText = inputElement.value.trim(); // trim убирает пробелы по краям
   if (!taskText) return;
 
-  items.push(taskText); 
+  items.push(taskText);
 
-  const item = createItem(taskText); 
-  listElement.prepend(item); 
+  const item = createItem(taskText);
+  listElement.prepend(item);
 
-  inputElement.value = ""; 
+  inputElement.value = "";
 
-  saveTasks(items); 
+  saveTasks(items);
 });
