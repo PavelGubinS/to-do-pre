@@ -80,18 +80,17 @@ items.forEach((item) => {
 });
 
 formElement.addEventListener("submit", (e) => {
-  // Обработчик добавления задачи
   e.preventDefault();
 
   const taskText = inputElement.value.trim();
   if (!taskText) return;
 
-  items.push(taskText); // Добавляем задачу в массив
+  items.push(taskText); 
 
-  const item = createItem(taskText); // Создаём элемент и добавляем в начало DOM
-  listElement.prepend(item);
+  const item = createItem(taskText); 
+  listElement.prepend(item); 
 
-  inputElement.value = ""; // Очищаем поле ввода
+  inputElement.value = ""; 
 
-  saveTasks(items); // Сохраняем в localStorage
+  saveTasks(items); 
 });
