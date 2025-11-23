@@ -14,7 +14,7 @@ const inputElement = document.querySelector(".to-do__input");
 function loadTasks() {
   const savedTasks = localStorage.getItem("tasks");
   if (savedTasks) {
-    return JSON.parse(savedTasks); // Парсим массив задач из localStorage
+    return JSON.parse(savedTasks);
   }
   return items;
 }
@@ -29,17 +29,15 @@ function createItem(item) {
   );
   const editButton = clone.querySelector(".to-do__item-button_type_edit");
 
-  textElement.textContent = item; // Устанавливаем текст задачи
+  textElement.textContent = item;
 
   deleteButton.addEventListener("click", () => {
-    // Обработчик удаления
     clone.remove();
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
   });
 
   duplicateButton.addEventListener("click", () => {
-    // Обработчик копирования
     const itemName = textElement.textContent;
     const newItem = createItem(itemName);
     listElement.prepend(newItem);
@@ -48,13 +46,11 @@ function createItem(item) {
   });
 
   editButton.addEventListener("click", () => {
-    // Обработчик редактирования
     textElement.setAttribute("contenteditable", "true");
     textElement.focus();
   });
 
   textElement.addEventListener("blur", () => {
-    // Обработчик завершения редактирования
     textElement.removeAttribute("contenteditable");
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
