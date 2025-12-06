@@ -7,7 +7,8 @@ let items = [
   "Помыть посуду",
 ];
 
-const listElement = document.querySelector(".to-do__list");
+const listElement =
+  document.querySelector(".to-do__list"); /* Забрал DOM-элементы */
 const formElement = document.querySelector(".to-do__form");
 const inputElement = document.querySelector(".to-do__input");
 
@@ -29,7 +30,7 @@ function createItem(item) {
   );
   const editButton = clone.querySelector(".to-do__item-button_type_edit");
 
-  textElement.textContent = item;
+  textElement.textContent = item; /* Установка текста задачи */
 
   deleteButton.addEventListener("click", () => {
     clone.remove();
@@ -51,7 +52,6 @@ function createItem(item) {
   });
 
   textElement.addEventListener("blur", () => {
-    // blur - когда элемент теряет фокус
     textElement.removeAttribute("contenteditable");
     const tasks = getTasksFromDOM();
     saveTasks(tasks);
@@ -81,9 +81,9 @@ items.forEach((item) => {
 });
 
 formElement.addEventListener("submit", (e) => {
-  e.preventDefault(); // Отменяет стандартное действие отправки формы
+  e.preventDefault();
 
-  const taskText = inputElement.value.trim(); // trim убирает пробелы по краям
+  const taskText = inputElement.value.trim();
   if (!taskText) return;
 
   items.push(taskText);
